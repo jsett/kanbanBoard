@@ -1,0 +1,54 @@
+-- CreateTable
+CREATE TABLE "Bookmark" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "boardId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    CONSTRAINT "Bookmark_boardId_fkey" FOREIGN KEY ("boardId") REFERENCES "Board" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Bookmark_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Board" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "boardName" TEXT,
+    "states" TEXT,
+    "userId" INTEGER NOT NULL,
+    CONSTRAINT "Board_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Tasks" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "state" TEXT NOT NULL,
+    "dueDate" TEXT,
+    "text" TEXT,
+    "boardId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    CONSTRAINT "Tasks_boardId_fkey" FOREIGN KEY ("boardId") REFERENCES "Board" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Tasks_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "TagsList" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "tasksId" INTEGER NOT NULL,
+    "tagId" INTEGER NOT NULL,
+    CONSTRAINT "TagsList_tasksId_fkey" FOREIGN KEY ("tasksId") REFERENCES "Tasks" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "TagsList_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "Tags" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Tags" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Comments" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "text" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "tasksId" INTEGER NOT NULL,
+    CONSTRAINT "Comments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Comments_tasksId_fkey" FOREIGN KEY ("tasksId") REFERENCES "Tasks" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

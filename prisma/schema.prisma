@@ -13,6 +13,66 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
-  email String  @unique
   name  String?
+  email String  @unique
+  image String?
+  tasks Tasks[]
+  bookmark Bookmark[]
+  comments Comments[]
+  boards Board[]
+}
+
+model Bookmark {
+  id    Int     @id @default(autoincrement())
+  board    Board    @relation(fields: [boardId], references: [id])
+  boardId  Int
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int
+}
+
+model Board {
+  id    Int     @id @default(autoincrement())
+  boardName  String?
+  states  String?
+  tasks Tasks[]
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int
+  bookmarked Bookmark[]
+}
+
+model Tasks {
+  id    Int     @id @default(autoincrement())
+  state String
+  dueDate String?
+  text String?
+  tagslist TagsList[]
+  board    Board    @relation(fields: [boardId], references: [id])
+  boardId  Int
+  comments Comments[]
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int
+}
+
+model TagsList {
+  id    Int     @id @default(autoincrement())
+  tasks    Tasks    @relation(fields: [tasksId], references: [id])
+  tasksId  Int
+  tag    Tags    @relation(fields: [tagId], references: [id])
+  tagId  Int
+
+}
+
+model Tags {
+  id    Int     @id @default(autoincrement())
+  name String @unique
+  tagslist TagsList[]
+}
+
+model Comments {
+  id    Int     @id @default(autoincrement())
+  text String
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int
+  tasks    Tasks    @relation(fields: [tasksId], references: [id])
+  tasksId  Int
 }
