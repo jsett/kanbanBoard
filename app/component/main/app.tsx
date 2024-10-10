@@ -21,7 +21,7 @@ import {
   import { createClient, ClientOptions, Client } from 'graphql-sse';
 import Kanban from './kanban';
 import { boardState } from './state/atoms';
-import { Board } from '@prisma/client';
+import { Board, User } from '@prisma/client';
 import SideBar from './sidebar';
 import NavBar from './navbar';
    
@@ -99,13 +99,13 @@ function DisplayCounter() {
 
 
 
-export default function MainApp({ board }: {board: Board }){
+export default function MainApp({ board, users }: {board: Board, users: User[] }){
     return <>
         <ApolloProvider client={client}>
             <RecoilRoot>
-              <NavBar />
+              <NavBar users={users} />
               <div className="flex flex-row">
-                <SideBar>
+                <SideBar users={users}>
                   <Kanban board={board}/>
                 </SideBar>
               </div>

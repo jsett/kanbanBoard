@@ -12,3 +12,8 @@ export const textState = atom({
     key: 'boardState',
     default: {},
   });
+
+  export const currentUserState = atom({
+    key: 'currentUser',
+    default: 0,
+  });
