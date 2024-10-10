@@ -125,11 +125,6 @@ async function addTasks(users: User[], boards: Board[], tags: Tags[]) {
       tasks.push(await addTask(`Task ${taskNum}`, board, users, tags))
     }
   }
-  // await boards.forEach(async (board, i) => {
-  //   await ["1","2","3","4","5","6","7","8","9"].forEach(async (taskNum) =>{
-  //     tasks.push(await addTask(`Task ${taskNum}`, board, users, tags))
-  //   })
-  // })
   return tasks;
 }
 

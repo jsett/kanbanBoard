@@ -1,6 +1,16 @@
 'use client';
 import { ApolloClient, useQuery, useSubscription, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
+import React from 'react';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
+
 import {
     ApolloLink,
     Operation,
@@ -9,6 +19,11 @@ import {
   } from '@apollo/client/core';
   import { print, GraphQLError } from 'graphql';
   import { createClient, ClientOptions, Client } from 'graphql-sse';
+import Kanban from './kanban';
+import { boardState } from './state/atoms';
+import { Board } from '@prisma/client';
+import SideBar from './sidebar';
+import NavBar from './navbar';
    
   class SSELink extends ApolloLink {
     private client: Client;
@@ -84,12 +99,17 @@ function DisplayCounter() {
 
 
 
-export default function MainApp(){
+export default function MainApp({ board }: {board: Board }){
     return <>
         <ApolloProvider client={client}>
-            <h1>hello world mainApp1</h1>
-            <DisplayGreeting />
-            <DisplayCounter />
+            <RecoilRoot>
+              <NavBar />
+              <div className="flex flex-row">
+                <SideBar>
+                  <Kanban board={board}/>
+                </SideBar>
+              </div>
+            </RecoilRoot>
         </ApolloProvider>
     </>
 }
