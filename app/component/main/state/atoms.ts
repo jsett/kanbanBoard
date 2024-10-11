@@ -11,7 +11,7 @@ export const textState = atom({
 
 export const themeState = atom({
     key: 'themeState', 
-    default: 'lofi',
+    default: 'garden',
 });
 
   export const boardState = atom({
