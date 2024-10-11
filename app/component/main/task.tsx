@@ -3,6 +3,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { useRecoilState } from 'recoil';
 import { taskByIDQuery } from './state/atoms';
 import Markdown from 'react-markdown';
+import MDViewer from './mdViewer';
 
 
 export function TaskComponent(props) {
@@ -21,18 +22,7 @@ export function TaskComponent(props) {
     if (task.hasOwnProperty("text")) {
         const editbox = editable ? 
             <textarea className="textarea textarea-bordered w-full h-full resize-y" defaultValue={task.text} onChange={e => setMarkdown(e.target.value)} ></textarea> 
-            : <Markdown components={{
-                // Map `h1` (`# heading`) to use `h2`s.
-                h1(props) {
-                    const {node, ...rest} = props
-                    return <h1 className='text-2xl font-extrabold' {...rest} />
-                  },
-                // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
-                em(props) {
-                  const {node, ...rest} = props
-                  return <i style={{color: 'red'}} {...rest} />
-                }
-              }}>{task.text}</Markdown>;   
+            : <MDViewer text={task.text} />;   
     
         return (
             <div ref={setNodeRef} style={style}  {...attributes} className="w-full rounded-md">
