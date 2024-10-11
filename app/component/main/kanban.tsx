@@ -5,45 +5,9 @@ import React, { useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import { Draggable } from "./Draggable";
 import { Droppable } from "./Droppable";
+import { TaskComponent } from "./task";
 
-function Tasks({ state, board }: { state: string, board: Board }) {
-    const myState = state;
-    if (board.hasOwnProperty("tasks")) {
-
-        const taskList = board.tasks.filter((task: Tasks) => {
-            return task.state == myState
-        }).map((task: Tasks) => {
-            return <Draggable id={`${task.id}`}><div className="m-2 bg-slate-100">
-                <div className="flex flex-col justify-end">
-                    <div className="grow">
-                        {task.text}
-                    </div>
-                    <div className="bg-slate-500">
-                        <div className="flex flex-row">
-                            <div className="text-m font-thin text-nowrap truncate grow ml-1 mr-1">{task.user.name}</div>
-                            <div className="avatar">
-                            <div className="w-5 rounded">
-                                <img
-                                    src={task.user.image}
-                                    alt="Tailwind-CSS-Avatar-component" />
-                            </div>
-                        </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            </Draggable>
-        })
-        return <>{taskList}</>
-    } else {
-        return <>
-            Nothing here
-        </>
-    }
-
-}
-
+import Tasks from "./tasks";
 
 export default function Kanban({ board }: { board: Board }) {
     const [rBoard, setBoard] = useRecoilState(boardState);
@@ -75,31 +39,32 @@ export default function Kanban({ board }: { board: Board }) {
     }
 
     const boardMapping = myStates.map((stateName: string) => {
-        return <div className="bg-blue-300">
-            <div className="h-full bg-green-200 flex flex-col justify-between">
-                <div className="w-32 bg-orange-200">
+        return <>
+            <div className="h-full flex flex-col justify-between border-secondary-content border-4 rounded-lg">
+                <div className=" rounded-t-md text-center font-bold text-lg bg-secondary-content text-secondary">
                     {stateName}
                 </div>
-                <div className="w-32 bg-orange-300 grow">
+                <div className=" bg-base-100 grow">
                     <Droppable key={`drop-${stateName}`} id={`${stateName}`}>
-                        <Tasks state={stateName} board={myboard} />
+                        <Tasks state={stateName} />
+                        {/* plus button */}
+                        <div className="flex flex-row w-full justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="inline-block h-7 w-7 stroke-current"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                        </div>
                     </Droppable>
                 </div>
-                <div className="w-32 bg-orange-200">
-                    tail
-                </div>
             </div>
-        </div>
+        </>
     })
 
     return <>
         {/* {JSON.stringify(myboard)} */}
-        <div className=" w-full grow h-full">
-            <div className="flex flex-row bg-blue-200 w-full h-full justify-around">
-                <DndContext onDragEnd={handleDragEnd}>
+        <div className=" w-full h-full">
+            <DndContext onDragEnd={handleDragEnd}>
+                <div className="grid grid-cols-4 gap-2 p-2 bg-neutral-content h-full">
                     {boardMapping}
-                </DndContext>
-            </div>
+                </div>
+            </DndContext>
         </div>
     </>
 }

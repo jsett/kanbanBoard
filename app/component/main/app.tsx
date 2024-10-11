@@ -20,10 +20,11 @@ import {
   import { print, GraphQLError } from 'graphql';
   import { createClient, ClientOptions, Client } from 'graphql-sse';
 import Kanban from './kanban';
-import { boardState } from './state/atoms';
+import { boardState, themeState } from './state/atoms';
 import { Board, User } from '@prisma/client';
 import SideBar from './sidebar';
 import NavBar from './navbar';
+import ThemeComponent from './theme';
    
   class SSELink extends ApolloLink {
     private client: Client;
@@ -100,15 +101,16 @@ function DisplayCounter() {
 
 
 export default function MainApp({ board, users }: {board: Board, users: User[] }){
+    
     return <>
         <ApolloProvider client={client}>
             <RecoilRoot>
-              <NavBar users={users} />
-              <div className="flex flex-row">
+              <ThemeComponent>
+                <NavBar users={users} />
                 <SideBar users={users}>
                   <Kanban board={board}/>
                 </SideBar>
-              </div>
+              </ThemeComponent>
             </RecoilRoot>
         </ApolloProvider>
     </>

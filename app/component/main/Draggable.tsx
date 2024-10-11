@@ -11,8 +11,8 @@ export function Draggable(props) {
 
   
   return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes} className="w-full">
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="w-full rounded-md">
       {props.children}
-    </button>
+    </div>
   );
 }
