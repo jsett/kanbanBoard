@@ -1,48 +1,12 @@
 import { User } from "@prisma/client";
 import { useRecoilState } from "recoil";
-import { currentUserState, themeState } from "./state/atoms";
+import { currentUserState } from "./state/atoms";
+import ThemeChooser from "./themeChooser";
 
 export default function NavBar({users}: {users: User[]}) {
     const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
-    const [theme, setTheme] = useRecoilState(themeState)
+    
     const myuser = users[currentUser];
-
-    const themesList = ["light",
-    "dark",
-    "cupcake",
-    "bumblebee",
-    "emerald",
-    "corporate",
-    "synthwave",
-    "retro",
-    "cyberpunk",
-    "valentine",
-    "halloween",
-    "garden",
-    "forest",
-    "aqua",
-    "lofi",
-    "pastel",
-    "fantasy",
-    "wireframe",
-    "black",
-    "luxury",
-    "dracula",
-    "cmyk",
-    "autumn",
-    "business",
-    "acid",
-    "lemonade",
-    "night",
-    "coffee",
-    "winter",
-    "dim",
-    "nord",
-    "sunset"]
-
-    const themeChooser = themesList.map(val => {
-        return <option key={`theme-${val}`} value={val}>{val}</option>
-    })
 
     const userList = users.map((user) => {
         return <option key={`userOp-user.id`} value={user.id}>{user.name}</option>
@@ -90,10 +54,7 @@ export default function NavBar({users}: {users: User[]}) {
                     </select>
                 </li>
                 <li>
-                    <select defaultValue="Set Theme" className="select select-secondary w-full max-w-xs" onChange={e => setTheme(e.target.value)}>
-                        <option disabled>Set Theme</option>
-                        {themeChooser}
-                    </select>
+                    <ThemeChooser />
                 </li>
                 
             </ul>
