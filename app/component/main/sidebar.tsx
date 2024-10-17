@@ -7,10 +7,10 @@ export default function SideBar({children, users}){
     const user = users[currentUser];
 
     const bookmarks = user.bookmark.map((bookmark) => {
-        return <li><Link className="link" href={`/board/${bookmark.board.id}`}>{bookmark.board.boardName}</Link></li>
+        return <li key={`bookmark-${bookmark.board.id}`}><Link className="link" href={`/board/${bookmark.board.id}`}>{bookmark.board.boardName}</Link></li>
     })
     const ownedBoard = user.boards.map((board) => {
-        return <li><Link className="link" href={`/board/${board.id}`}>{board.boardName}</Link></li>
+        return <li key={`board-${board.id}`}><Link className="link" href={`/board/${board.id}`}>{board.boardName}</Link></li>
     })
 
     return <div className="drawer lg:drawer-open">

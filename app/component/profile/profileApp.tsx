@@ -6,10 +6,10 @@ import Link from "next/link";
 
 export default function ProfileApp({user, users}){
     const bookmarks = user.bookmark.map((bookmark) => {
-        return <li><Link className="link link-secondary" href={`/board/${bookmark.board.id}`}>{bookmark.board.boardName}</Link></li>
+        return <li key={`bookmark-${bookmark.board.id}`}><Link className="link link-secondary" href={`/board/${bookmark.board.id}`}>{bookmark.board.boardName}</Link></li>
     })
     const ownedBoard = user.boards.map((board) => {
-        return <li><Link className="link link-secondary" href={`/board/${board.id}`}>{board.boardName}</Link></li>
+        return <li key={`board-${board.id}`}><Link className="link link-secondary" href={`/board/${board.id}`}>{board.boardName}</Link></li>
     })
 
     return <>

@@ -9,7 +9,7 @@ export default function NavBar({users}: {users: User[]}) {
     const myuser = users[currentUser];
 
     const userList = users.map((user) => {
-        return <option key={`userOp-user.id`} value={user.id}>{user.name}</option>
+        return <option key={`userOp-${user.id}`} value={user.id}>{user.name}</option>
     })
 
     return <div className="navbar bg-base-300">
@@ -48,8 +48,8 @@ export default function NavBar({users}: {users: User[]}) {
                 <li><a>Settings</a></li>
                 <li><a>Logout</a></li>
                 <li>
-                    <select className="select select-bordered w-full" onChange={(e) => setCurrentUser(e.target.value)}  >
-                        <option disabled selected>Current User</option>
+                    <select defaultValue={"Current User"} className="select select-bordered w-full" onChange={(e) => setCurrentUser(e.target.value)}  >
+                        <option disabled>Current User</option>
                         {userList}
                     </select>
                 </li>

@@ -8,6 +8,7 @@ import { Droppable } from "./Droppable";
 import { TaskComponent } from "./task";
 
 import Tasks from "./tasks";
+import AddTask from "./addTask";
 
 export default function Kanban({ board }: { board: Board }) {
     const [rBoard, setBoard] = useRecoilState(boardState);
@@ -39,22 +40,17 @@ export default function Kanban({ board }: { board: Board }) {
     }
 
     const boardMapping = myStates.map((stateName: string) => {
-        return <>
-            <div className="h-full flex flex-col justify-between border-secondary-content border-4 rounded-lg">
+        return <div key={`boardstates-${stateName}`} className="h-full flex flex-col justify-between border-secondary-content border-4 rounded-lg">
                 <div className=" rounded-t-md text-center font-bold text-lg bg-secondary-content text-secondary">
                     {stateName}
                 </div>
                 <div className=" bg-base-100 grow">
                     <Droppable key={`drop-${stateName}`} id={`${stateName}`}>
                         <Tasks state={stateName} />
-                        {/* plus button */}
-                        <div className="flex flex-row w-full justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="inline-block h-7 w-7 stroke-current"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                        </div>
+                        <AddTask boardID={myboard.id} state={stateName} />
                     </Droppable>
                 </div>
             </div>
-        </>
     })
 
     return <>

@@ -1,10 +1,16 @@
 ## todo
-- make the add task work
 - add a delete button for tasks
 - make the current state update on the backend
 - create a landing page for the user
+- make board updates persistent
 - setup realtime updates
 - make it so users are assignable
+- make tasks taggable
+- make tasks commentable
+- add due date to tasks
+- add due date to add tasks dialog
+- add tags to add tasks dialog
+- make the assign user dialog have a auto compleat for user name
 
 ## Running development server
 
