@@ -1,5 +1,4 @@
 ## todo
-- add a delete button for tasks
 - make the current state update on the backend
 - create a landing page for the user
 - make board updates persistent
