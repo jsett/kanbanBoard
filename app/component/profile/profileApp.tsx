@@ -2,13 +2,14 @@
 import NavBar from "../main/navbar";
 import { RecoilRoot } from "recoil";
 import ThemeComponent from "../main/theme";
+import Link from "next/link";
 
 export default function ProfileApp({user, users}){
     const bookmarks = user.bookmark.map((bookmark) => {
-        return <li><a className="link-secondary">{bookmark.board.boardName}</a></li>
+        return <li><Link className="link link-secondary" href={`/board/${bookmark.board.id}`}>{bookmark.board.boardName}</Link></li>
     })
     const ownedBoard = user.boards.map((board) => {
-        return <li><a className="link-secondary">{board.boardName}</a></li>
+        return <li><Link className="link link-secondary" href={`/board/${board.id}`}>{board.boardName}</Link></li>
     })
 
     return <>

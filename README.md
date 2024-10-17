@@ -1,10 +1,10 @@
 ## todo
-- make bookmarks work
 - make the add task work
 - add a delete button for tasks
 - make the current state update on the backend
 - create a landing page for the user
 - setup realtime updates
+- make it so users are assignable
 
 ## Running development server
 

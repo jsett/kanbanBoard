@@ -1,15 +1,16 @@
 import { useRecoilState } from "recoil"
 import { currentUserState } from "./state/atoms"
+import Link from "next/link";
 
 export default function SideBar({children, users}){
     const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
     const user = users[currentUser];
 
     const bookmarks = user.bookmark.map((bookmark) => {
-        return <li><a>{bookmark.board.boardName}</a></li>
+        return <li><Link className="link" href={`/board/${bookmark.board.id}`}>{bookmark.board.boardName}</Link></li>
     })
     const ownedBoard = user.boards.map((board) => {
-        return <li><a>{board.boardName}</a></li>
+        return <li><Link className="link" href={`/board/${board.id}`}>{board.boardName}</Link></li>
     })
 
     return <div className="drawer lg:drawer-open">
