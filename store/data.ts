@@ -16,3 +16,6 @@ export const boardAtom = atom<BoardStoreData>(initBoard)
 
 export const statesAtom = focusAtom(boardAtom, (optic) => optic.prop("states"));
 export const statesAtomsAtom = splitAtom(statesAtom);
+
+export const tasksAtom = focusAtom(boardAtom, (optic) => optic.prop("tasks"));
+export const tasksAtomsAtom = splitAtom(tasksAtom);

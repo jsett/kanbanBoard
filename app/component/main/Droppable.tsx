@@ -6,7 +6,6 @@ export function Droppable(props) {
     id: props.id,
   });
   
-  
   return (
     <div ref={setNodeRef} className='w-full h-full'>
       {props.children}
