@@ -1,5 +1,6 @@
 import Image from "next/image";
-import MainApp from "./component/main/app";
+import MainApp, { BoardData } from "./component/main/app";
+import {MainApp2} from "./component/main/app";
 
 import prisma from "@/lib/db";
 
@@ -14,21 +15,31 @@ export default async function Home() {
       boards: true
     }
   })
-  const board = await prisma.board.findFirst({
+  let board = await prisma.board.findFirst({
     include: {
       tasks: {
         include: {
-          user: true
+          user: true,
+          tagslist: {
+            include: {
+              tag: true
+            }
+          }
         }
       }
     }
   })
 
+  if(board){
+    board.states = board.states ? JSON.parse(board?.states) : [];
+  }
+
   return (
     <>
     {/* {JSON.stringify(users)} */}
-    {/* {JSON.stringify(board)} */}
-    <MainApp board={board} users={users} />
+    {/* {JSON.stringify(board.states)} */}
+    {/* <MainApp board={board} users={users} /> */}
+    <MainApp2 board={board} users={users} />
     </>
   );
 }

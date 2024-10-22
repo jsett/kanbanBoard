@@ -1,8 +1,9 @@
 import { useRecoilState } from "recoil"
-import { themeState } from "./state/atoms"
+import { themeAtom } from "@/store/data";
+import { useAtom } from "jotai";
 
 export default function ThemeComponent({children}){
-    const [theme, setTheme] = useRecoilState(themeState);
+    const [theme, setTheme] = useAtom(themeAtom);
     return <div data-theme={theme}>
         {children}
     </div>

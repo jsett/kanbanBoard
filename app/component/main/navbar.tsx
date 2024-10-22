@@ -1,10 +1,10 @@
 import { User } from "@prisma/client";
-import { useRecoilState } from "recoil";
-import { currentUserState } from "./state/atoms";
 import ThemeChooser from "./themeChooser";
+import { useAtom } from "jotai";
+import { currentUserAtom } from "@/store/data";
 
 export default function NavBar({users}: {users: User[]}) {
-    const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+    const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
     
     const myuser = users[currentUser];
 

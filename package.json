@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev-bug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -20,6 +21,8 @@
     "graphql-sse": "^2.5.3",
     "graphql-yoga": "^5.7.0",
     "install": "^0.13.0",
+    "jotai": "^2.10.1",
+    "jotai-optics": "^0.4.0",
     "next": "14.2.15",
     "prisma": "^5.20.0",
     "react": "^18",

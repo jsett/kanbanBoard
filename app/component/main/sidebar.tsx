@@ -1,9 +1,11 @@
 import { useRecoilState } from "recoil"
 import { currentUserState } from "./state/atoms"
 import Link from "next/link";
+import { useAtom } from "jotai";
+import { currentUserAtom } from "@/store/data";
 
 export default function SideBar({children, users}){
-    const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
+    const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
     const user = users[currentUser];
 
     const bookmarks = user.bookmark.map((bookmark) => {

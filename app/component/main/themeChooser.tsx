@@ -1,8 +1,8 @@
-import { useRecoilState } from "recoil"
-import { themeState } from "./state/atoms"
+import { themeAtom } from "@/store/data"
+import { useAtom } from "jotai"
 
 export default function ThemeChooser(){
-    const [theme, setTheme] = useRecoilState(themeState)
+    const [theme, setTheme] = useAtom(themeAtom)
 
     const themesList = ["light",
     "dark",
@@ -41,8 +41,10 @@ export default function ThemeChooser(){
         return <option key={`theme-${val}`} value={val}>{val}</option>
     })
 
-    return <select defaultValue="Set Theme" className="select select-secondary w-full max-w-xs" onChange={e => setTheme(e.target.value)}>
-        <option disabled>Set Theme</option>
-        {themeChooser}
-    </select>
+    return <>
+        <select defaultValue="Set Theme" className="select select-secondary w-full max-w-xs" onChange={e => setTheme(e.target.value)}>
+            <option disabled>Set Theme</option>
+            {themeChooser}
+        </select>
+    </>
 }
