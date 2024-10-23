@@ -1,5 +1,6 @@
 import { useAtom } from "jotai";
 import { tasksAtom } from "@/store/data";
+import { UserAutoCompleate } from "../userAutoCompleate";
 
 
 export default function AddTask({ boardID, state }){
@@ -35,7 +36,7 @@ export default function AddTask({ boardID, state }){
                     <input type="hidden" name="state" value={state}/>
                     <input type="hidden" name="board" value={boardID}/>
                     <textarea name="text" className="textarea w-full textarea-bordered" placeholder="Task Description"></textarea>
-                    <input name="assignedUser" type="text" placeholder="Assign To User ID" className="input input-bordered w-full" />
+                    <UserAutoCompleate />
                 </form>
 
                 <div className="modal-action">

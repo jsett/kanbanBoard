@@ -16,7 +16,9 @@ export default function Kanban({ board }: { board: BoardData }) {
     function handleDragEnd(event) {
         const { over, active } = event;
         console.log(event);
-        active.data.current.updater(over.id);
+        if (over && active){
+            active.data.current.updater(over.id);
+        }
     }
 
     return <>
