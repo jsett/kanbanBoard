@@ -4,6 +4,7 @@ import DeleteTask from './deleteTask';
 import { useAtom } from "jotai";
 import { EditButton } from './editButton';
 import { EditBox } from './editBox';
+import { AssignUser } from './assignUser';
 
 export function TaskComponent({taskAtom, stateName}) {
     const [task, setTask] = useAtom(taskAtom);
@@ -45,14 +46,8 @@ export function TaskComponent({taskAtom, stateName}) {
                         <div className="flex flex-row justify-end bg-primary-content text-primary rounded-t-md p-1">
                             <EditButton editable={editable} setTask={setTask} setEditable={setEditable} markdown={markdown} />
                             <DeleteTask boardID={task.boardID} taskID={task.id} />
-                            <div ref={setActivatorNodeRef} {...listeners} className="text-m font-thin text-nowrap truncate grow ml-1 mr-1 text-end">{task.user.name}</div>
-                            <div className="avatar tooltip" data-tip="assigned user">
-                                <div className="w-5 rounded">
-                                    <img
-                                        src={task.user.image}
-                                        alt="Tailwind-CSS-Avatar-component" />
-                                </div>
-                            </div>
+                            <div ref={setActivatorNodeRef} {...listeners} className="text-m font-thin text-nowrap truncate grow ml-1 mr-1 text-end"></div>
+                            <AssignUser task={task} setTask={setTask} />
                         </div>
                     </div>
                     <div ref={setActivatorNodeRef} {...listeners} className="flex flex-col justify-end rounded-md">
