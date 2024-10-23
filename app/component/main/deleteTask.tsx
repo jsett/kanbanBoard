@@ -1,13 +1,25 @@
 import { deleteTaskAction } from "@/app/actions/deleteTaskAction"
+import { tasksAtom } from "@/store/data"
+import { useAtom } from "jotai"
 import { useRecoilState } from "recoil"
 
 export default function DeleteTask({ taskID, boardID }){
+    const [tasks, setTasks] = useAtom(tasksAtom);
 
-
+    const deleteThisTask = () => {
+        //update the client state
+        setTasks((pre) => {
+            const res = pre.filter((val) => { return val.id != taskID })
+            console.log({taskID,pre, res})
+            return res
+        })
+        //update the server
+        document.getElementById(`delete_${taskID}`).requestSubmit()
+    }
 
     return <>
         <div onClick={() => document.getElementById(`delete_modal_${taskID}`).showModal()}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="inline-block h-7 w-7 stroke-current" ><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="h-7 w-7 fill-base-content" ><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
         </div>
         <dialog id={`delete_modal_${taskID}`} className="modal">
             <div className="modal-box">
@@ -18,7 +30,7 @@ export default function DeleteTask({ taskID, boardID }){
                 </form>
                 <div className="modal-action justify-center">
                     <form method="dialog">
-                        <button className="btn mr-2" onClick={() => document.getElementById(`delete_${taskID}`).requestSubmit()}>Yes</button>
+                        <button className="btn mr-2" onClick={deleteThisTask}>Yes</button>
                         <button className="btn">No</button>
                     </form>
                 </div>

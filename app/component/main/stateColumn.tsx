@@ -2,10 +2,13 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { Droppable } from "./Droppable";
 import {Tasks} from "./tasks";
 import { useAtom } from "jotai";
+import AddTask from './addTask';
+import { tasksAtom } from '@/store/data';
 
 
 export function StateColumn({stateAtom, boardId}){
     const [state, setState] = useAtom(stateAtom);
+    const [tasks, setTasks] = useAtom(tasksAtom);
     
     return <div key={`boardstates-${state}`} className="h-full flex flex-col justify-between border-secondary-content border-4 rounded-lg">
             <div className=" rounded-t-md text-center font-bold text-lg bg-secondary-content text-secondary">
@@ -14,7 +17,7 @@ export function StateColumn({stateAtom, boardId}){
             <div className=" bg-base-100 grow">
                 <Droppable key={`drop-${state}`} id={`${state}`}>
                     <Tasks state={state} />
-                    {/* <AddTask boardID={boardId} state={state} /> */}
+                    <AddTask boardID={boardId} state={state} />
                 </Droppable>
             </div>
         </div>

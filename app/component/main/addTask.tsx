@@ -3,13 +3,15 @@ import { addTaskAction } from "@/app/actions/addTaskAction"
 
 
 export default function AddTask({ boardID, state }){
-    //const [task, setTask] = useRecoilState(taskByIDQuery(props.task.id))
-
-
 
     return <>
         <div className="flex flex-row w-full justify-center" onClick={() => document.getElementById(`create_modal_${state}`).showModal()}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="inline-block h-7 w-7 stroke-current"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960"
+                className="inline-block h-7 w-7 fill-base-content">
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+            </svg>
         </div>
         <dialog id={`create_modal_${state}`} className="modal">
             <div className="modal-box">
