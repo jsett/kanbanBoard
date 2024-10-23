@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import MDViewer from './mdViewer';
 import DeleteTask from './deleteTask';
-import { EditTaskAction } from '@/app/actions/editTaskAction';
 import { useAtom } from "jotai";
 import { EditButton } from './editButton';
 import { EditBox } from './editBox';
@@ -11,9 +9,25 @@ export function TaskComponent({taskAtom, stateName}) {
     const [task, setTask] = useAtom(taskAtom);
     const [editable, setEditable] = useState(false);
     const [markdown, setMarkdown] = useState('');
+    const updater = (newstate: string) => {
+        const formData = new FormData();
+        
+        formData.append("taskId", task.id);
+        formData.append("state", newstate);
+        formData.append("text", task.text);
+        formData.append("assignedUser", task.userId);
+        formData.append("boardId", task.boardId);
+
+        fetch('/api/tasks/update', {
+            method: 'post',
+            body: formData,
+        })
+
+        setTask((pre) => ({...pre, state: newstate}))
+    } 
     const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform } = useDraggable({
         id: `${stateName}-${task.id}`,
-        data: {updater: (newstate: string) => setTask((pre) => ({...pre, state: newstate})) },
+        data: {updater: updater },
         disabled: editable
     });
 

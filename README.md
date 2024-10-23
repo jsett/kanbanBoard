@@ -1,7 +1,5 @@
 ## todo
-- make the current state update on the backend
 - create a landing page for the user
-- make board updates persistent
 - setup realtime updates
 - make it so users are assignable
 - make tasks taggable
@@ -10,6 +8,7 @@
 - add due date to add tasks dialog
 - add tags to add tasks dialog
 - make the assign user dialog have a auto compleat for user name
+- create new board
 
 ## Running development server
 

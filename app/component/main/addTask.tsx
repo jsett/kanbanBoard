@@ -1,5 +1,3 @@
-import { useRecoilState } from "recoil"
-import { addTaskAction } from "@/app/actions/addTaskAction"
 import { useAtom } from "jotai";
 import { tasksAtom } from "@/store/data";
 
@@ -9,7 +7,7 @@ export default function AddTask({ boardID, state }){
 
     const submitForm = () => {
         const form = new FormData(document.getElementById(`create_${state}`));
-        fetch('/api/tasks', {
+        fetch('/api/tasks/add', {
             method: 'post',
             body: form,
         }).then((res) => {
