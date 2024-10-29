@@ -1,16 +1,3 @@
-## todo
-- create a landing page for the user
-- setup realtime updates
-- make tasks taggable
-- make tasks commentable
-- add due date to tasks
-- add due date to add tasks dialog
-- add tags to add tasks dialog
-- create new board
-- add bookmark button
-- remove bookmark
-- edit board name
-
 ## Running development server
 
 First, run the development server:
@@ -75,3 +62,17 @@ comments:
     user : user
     task : task
 ```
+
+
+## future features
+- create a landing page for the user
+- setup realtime updates
+- make tasks taggable
+- make tasks commentable
+- add due date to tasks
+- add due date to add tasks dialog
+- add tags to add tasks dialog
+- create new board
+- add bookmark button
+- remove bookmark
+- edit board name
