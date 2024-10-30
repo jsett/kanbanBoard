@@ -43,7 +43,7 @@ export default function NavBar({users}: {users: User[]}) {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                 <li className="font-bold">
-                    {myuser.name}
+                    {myuser.name} ID({myuser.id})
                 </li>
                 <li><a>Settings</a></li>
                 <li><a>Logout</a></li>

@@ -73,6 +73,5 @@ comments:
 - add due date to add tasks dialog
 - add tags to add tasks dialog
 - create new board
-- add bookmark button
 - remove bookmark
-- edit board name
+- compleat the type definitions

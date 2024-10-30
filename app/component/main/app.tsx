@@ -51,7 +51,7 @@ export function MainApp({ board, users }: { board: BoardData, users: User[] }) {
     <MyProviders>
       <NavBar users={users} />
       <SideBar users={users}>
-        <Kanban board={board} />
+        <Kanban board={board} users={users} />
       </SideBar>
     </MyProviders>
   </>
